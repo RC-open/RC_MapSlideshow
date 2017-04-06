@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HTMLWidget name="Mapbox widget" formatNumber="4" creator="Rene Chen" isResizable="true" defaultWidth="400" defaultHeight="400" localization="none">
+    <!-- 
+    
+    TODO: Add controls and widget output here
+    @see http://adobe-muse.github.io/MuCowDocs for more information
+    
+    -->
+    <parameters>
+        <section label="Basic Setup" expanded="true" name="basicSetup" >
+            <text name="mapboxToken" label="Mapbox Token" defaultValue="pk.eyJ1IjoibWFnaWNjY2NhdCIsImEiOiJjaXowMXBmdmgwNHN3MnduOG43bzYyNHY1In0.IjTqBl8XLlnt5aIVDGtYcQ"></text>
+            <text name="mapID" label="Map ID" defaultValue="username.mapID"></text>
+            <text name="mapStyle" label="Style ID" defaultValue="mapbox://styles/mapbox/streets-v9"></text>
+            <number name="centerX" label="Center X" defaultValue="0" min="-180" max="180"></number>
+            <number name="centerY" label="Center Y" defaultValue="0" min="-90" max="90"></number>
+            <number name="zoomLvl" label="Zoom Level" defaultValue="1" min="0" max="300"></number>
+            <bool name="showNavigation" label="Show Navigation" defaultValue="true">
+                <trueVal value="true"/>
+                <falseVal value="false" disableOptions=""/>
+            </bool>
+            <bool name="multiWorldMap" label="Draw Multiple World Map" defaultValue="true">
+                <trueVal value= "true"/>
+                <falseVal value="false"/>
+            </bool>
+            <bool name="scrollToZoom" label="Scroll to Zoom" defaultValue="true">
+            <trueVal value="true"></trueVal>
+            <falseVal value="false"></falseVal>
+            </bool>
+            
+            <info label="Use Mapbox Studio to Create your Style and Token" linkURL="https://www.mapbox.com/studio/welcome/"></info>
+        </section>
+        <separator></separator>
+        <section label="3D Buildings" expanded="false" name="3DBuildingSession" >
+            <bool name="3DBuildingSwitch" label="Enable" defaultValue="false">
+                <trueVal value="true"/>
+                <falseVal value="false" disableOptions="pitch,bearing,buildingColor,buildingOpacity,minZoom"/>
+            </bool>
+            <number name="pitch" label="Pitch" defaultValue="45" min="0" max="60"></number>
+            <number name="bearing" label="Bearing" defaultValue="18" min="0" max="360"></number>
+            <color  name="buildingColor" label="Building Color" defaultValue="#FFFFFF"></color>
+            <number name="buildingOpacity" label="Opacity" defaultValue="1" min="0" max="1"></number>
+            <number name="minZoom" label="Min Zoom" defaultValue="15" min="2" max="100"></number>
+        </section>
+        <separator></separator>
+        <section label="Location" expanded="false" name="locationSession" >
+        <bool name="locationSwitch" label="Enable" defaultValue="false">
+            <trueVal value="true"/>
+            <falseVal value="false" disableOptions="geoJSONFile,locationSlideshowSwitch,showLocationBackNext,showSlideshowPlayStop,cameraCenterOffsetX,cameraCenterOffsetY,cameraZoomMax,cameraZoomMin,cameraPitchMin,cameraPitchMax,cameraBearingMin,cameraBearingMax,createMarker,taskOfClick,markerSize,showTitleAndDescription,markerImage,playIcon,showMedia"/>
+        </bool>
+        <file name="geoJSONFile" label="Add a GeoJSONFile" fileRequiredForOutput="true"></file>
+        <info label="1. Create Dataset in Mapbox and download as GeoJSON.
+2. If you want your location appear on the map, export Dataset as Titleset, and add the Titleset to Style.
+3. Ensure this widget and your Style use the same Dataset/Titleset." linkURL="http://www.mapbox.com"></info>
+
+        <number name="cameraCenterOffsetX" defaultValue="0" label="Camera Center Offset X" min="-100" max="100" digitsPrecision="2" step="0.01" snap="0.01"></number>
+        <number name="cameraCenterOffsetY" defaultValue="0" label="Camera Center Offset Y" min="-100" max="100" digitsPrecision="2" step="0.01" snap="0.01"></number>
+        <number name="cameraZoomMax" defaultValue="16" label="Camera Min Zoom" min="1" max="22" digitsPrecision="2" step="0.1" snap="0.01"></number>
+        <number name="cameraZoomMin" defaultValue="18" label="Camera Max Zoom" min="1" max="22" digitsPrecision="2" step="0.1" snap="0.01"></number>   
+        <number name="cameraPitchMin" defaultValue="0" label="Camera Min Pitch" min="0" max="60" digitsPrecision="2" step="1" snap="0.01"></number>
+        <number name="cameraPitchMax" defaultValue="60" label="Camera Max Pitch" min="0" max="60" digitsPrecision="2" step="1" snap="0.01"></number>
+        <number name="cameraBearingMin" defaultValue="0" label="Camera Min Bearing" min="0" max="360" digitsPrecision="2" step="1" snap="0.01"></number>
+        <number name="cameraBearingMax" defaultValue="30" label="Camera Max Bearing" min="0" max="360" digitsPrecision="2" step="1" snap="0.01"></number>
+        <bool name="createMarker" label="Create Clickable Marker" defaultValue="true">
+            <trueVal value="true"/>
+            <falseVal value="false" disableOptions="taskOfClick,markerSize,markerImage"/>
+        </bool>   
+        <list name="taskOfClick" defaultValue="goToLocation" label="Click to">
+            <value name="goToLocation" label="Go to Location"></value>
+            <value name="popupWindow" label="Popup Window"></value>
+        </list>
+        <number name="markerSize" label="Marker Size" defaultValue="30" max="80" min="10"></number>   
+        <file name="markerImage" label="Marker Icon" fileRequiredForOutput="true"></file>
+
+        <bool name="showTitleAndDescription" label="Show Title and Description in Muse Element" defaultValue="true">
+            <falseVal value="false" disableOptions=""></falseVal>
+            <trueVal value="true"></trueVal>
+        </bool>
+        <info label="Need Optional Properties in GeoJSON: title, description"></info>
+        <info label="Need Element: locationTitle, locationDescription"></info>
+        <bool name="showMedia" label="Show Media in Muse Element" defaultValue="true">
+            <falseVal value="false" disableOptions=""></falseVal>
+            <trueVal value="true"></trueVal>
+        </bool>
+        <info label="Need Optional Properties in GeoJSON: mediaName, mediaType (video, image)"></info>
+        <info label="Need Element: locationMedia"></info>
+        <info label="Use Add Files for Upload to add your media files"></info>
+        <separator></separator>
+        <bool name="showLocationBackNext" label="Use Back and Next button" defaultValue="false">
+            <trueVal value="true"/>
+            <falseVal value="false" disableOptions=""/>
+        </bool>   
+        <info label="Need Element: locationBackButton, locationNextButton"></info>
+        <separator></separator>
+        <bool name="locationSlideshowSwitch" label="Play Location Slideshow" defaultValue="false">
+            <trueVal value="true"/>
+            <falseVal value="false" disableOptions="showSlideshowPlayStop,slideLastTime"/>
+        </bool>
+        <number name="slideLastTime" label="Each Slide Last: " min="0.5" max="100" defaultValue="3" snap="0.5" step="0.5" digitsPrecision="1"></number>
+        <separator></separator>
+        <bool name="showSlideshowPlayStop" label="Use Play/Stop button" defaultValue="false">
+            <trueVal value="true"/>
+            <falseVal value="false" disableOptions="playIcon"/>
+        </bool>  
+        <file name="playIcon" label="Play Icon" fileRequiredForOutput="true"></file>
+        <info label="Need Element: slideshowPlayStopButton, applied Stop button Icon"></info>
+        </section>
+
+       
+        
+    </parameters>
+    
+    <headHTML>
+    <![CDATA[
+    
+    ]]>
+    </headHTML>
+    
+    
+    <pageItemHTML>
+    <![CDATA[
+<head>
+<meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        .marker {
+                    display: block;
+                    border: none;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    padding: 0;
+                }
+        #locationVideo {
+            position: absolute; 
+            min-width: 100%; 
+            min-height: 100%; 
+            width: 100%; 
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id='map'></div>
+    <!--<div id='mapOverlay'></div>-->
+    <script>
+    mapboxgl.accessToken = '{param_mapboxToken}';
+    var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: '{param_mapStyle}', //stylesheet location
+    center: [{param_centerX}, {param_centerY}], // starting position
+    zoom: {param_zoomLvl}, // starting zoom
+    renderWorldCopies: {param_multiWorldMap}, // multuple world maps
+    scrollZoom :{param_scrollToZoom},// scroll To Zoom function
+    worldCopyJump: true,
+    });
+
+    if ("{param_3DBuildingSwitch}" == "true"){
+                    map.setBearing({param_bearing});
+                    map.setPitch({param_pitch});
+                    map.setMinZoom(2);
+                    map.setZoom(2);
+                    map.on('load', function() {
+                            map.addLayer({
+                                'id': '3d-buildings',
+                                'source': 'composite',
+                                'source-layer': 'building',
+                                'filter': ['==', 'extrude', 'true'],
+                                'type': 'fill-extrusion',
+                                'minzoom': {param_minZoom},
+                                'paint': {
+                                    'fill-extrusion-color': '#{param_buildingColor}',
+                                    'fill-extrusion-height': {
+                                    'type': 'identity',
+                                    'property': 'height'
+                                    },
+                                    'fill-extrusion-base': {
+                                    'type': 'identity',
+                                    'property': 'min_height'
+                                    },
+                                'fill-extrusion-opacity': {param_buildingOpacity}
+                                }
+                            });
+                        });
+    }
+    if("{param_showNavigation}" =="true"){
+        map.addControl(new mapboxgl.NavigationControl());
+    }
+
+
+    </script>
+</body>
+
+    ]]>
+    
+    </pageItemHTML>
+    
+    <bodyEndHTML>
+    <![CDATA[
+    <script>
+
+//////////////////////////Muse Class Element Widget Connection Library//////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+///Use style function in Muse to name your class. This library will be able to find them.///////////
+////////////When referring muse class, please use ".className" format in arrays and varibles////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    // To set the text to identified element by Muse Class
+    function setTextToMuseClass(contentArray, museClassNameArray,){
+    $.each(contentArray, function(index, value){
+        $(museClassNameArray[index]).fadeOut(function() {
+                $(this).text(value).fadeIn();
+        });
+    })
+    }
+
+    // To set the media to identified element by Muse Class
+    function setMediaToMuseClass(mediaNameArray, typeArray, museClassNameArray,){
+    $.each(mediaNameArray, function(index, value){
+  
+        $(museClassNameArray[index]).fadeOut(function() {
+                $(this).css("background-image", "none").fadeIn();
+                $(this).empty();
+                // clean up
+          switch(typeArray[index]){
+                case("video"):
+                    var videoSRC = "assets/" + mediaNameArray[index];
+                    var sourceTag = "<source src='" + videoSRC + "' type='video/mp4'>"
+                    var videoTag = "<video id='locationVideo' loop autoplay width=100%>" +
+sourceTag + 
+"</video>";
+                    $(this).append(videoTag).fadeIn();
+                    break;
+                case("image"):
+                    var imageURL = "url(assets/" + mediaNameArray[index] + ")";
+                    $(this).css({
+                            "background-image": imageURL,
+                            "background-size": "100%"
+                    }).fadeIn();
+                    break;
+                default:
+                    $(this).css("background-image", "none").fadeIn();
+                    break;
+            }
+            
+
+        });
+    })
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////location related////////////////////
+    var currentLocationIndex = 0;
+
+    function goToLocation(locationObjectArray,index){
+        if("{param_showTitleAndDescription}" == "true"){
+            setTextToMuseClass([locationObjectArray[index].properties.title, locationObjectArray[index].properties.description], [".locationTitle",".locationDescription"]);
+        }
+        if("{param_showMedia}" == "true"){
+            setMediaToMuseClass([locationObjectArray[index].properties.mediaName],[locationObjectArray[index].properties.mediaType], [".locationMedia"]);
+        }
+        //Prevent find the closet route and miss the markers
+        var currentLocation = map.getCenter();
+        var nextLocation = locationObjectArray[index].geometry.coordinates;
+        var productLng = currentLocation.lng * nextLocation[0];
+        var productLat = currentLocation.lat * nextLocation[1];
+        var midLocationCam;
+        if(productLng<0){
+            var midLng = currentLocation.lng + nextLocation[0];
+            var midLat;
+            var currentZoom = map.getZoom();
+            var currentPitch = map.getPitch();
+            var currentBearing = map.getBearing();
+            if (productLat <0){
+                midLat = currentLocation.lat + nextLocation[1]
+            }else{
+                midLat = (currentLocation.lat + nextLocation[1])/2
+            }
+            midLocationCam = {
+                center: [midLng,midLat],
+                zoom: 1,
+                pitch: 0,
+                bearing: 0
+            }
+            
+        };
+
+        if(midLocationCam){
+            map.flyTo(midLocationCam);
+            midLocationCam = "";
+            map.once('moveend', function() {
+                // wait 3 sec
+                map.flyTo(locationObjectArray[index].properties.camera);
+
+            });
+        }else{
+               map.flyTo(locationObjectArray[index].properties.camera);
+
+        };
+            currentLocationIndex = index;
+    }
+//To flyover to a location and update the title and description
+    
+    function addCameraPropToGeoJSON(locationObjectArray){
+        $.each(locationObjectArray, function(index,value){
+        var target = locationObjectArray[index].geometry.coordinates;
+        var cameraOffsetCenter = [target[0]+{param_cameraCenterOffsetX},target[1]+{param_cameraCenterOffsetY}];
+        var zoomGenerated = Math.floor(Math.random()*({param_cameraZoomMax}-{param_cameraZoomMin}+1)+{param_cameraZoomMin});
+        var pitchGenerated = Math.floor(Math.random()*({param_cameraPitchMax}-{param_cameraPitchMin}+1)+{param_cameraPitchMin}); 
+        var bearingGenerated = Math.floor(Math.random()*({param_cameraBearingMax}-{param_cameraBearingMin}+1)+{param_cameraBearingMin}); 
+        locationObjectArray[index].properties.camera= {
+                center: cameraOffsetCenter,
+                zoom: zoomGenerated,
+                pitch: pitchGenerated,
+                bearing: bearingGenerated
+                };
+        })  
+    }
+//To add camera data to geoJSON according to the settings
+
+
+    var stopIcon = $(".slideshowPlayStopButton").css("background-image")
+    var slideshowControl = "play"
+    var slidePlayTimer;
+    function playback(locationObjectArray, index, initiate) {
+        if(initiate == 1){
+            slideshowControl = "play";
+
+            if("{param_playIcon}"){
+                $(".slideshowPlayStopButton").css("background-image", stopIcon);
+            };
+            //change play button icon and status
+        };
+        //all for initiate
+        if (slideshowControl == "play"){
+            goToLocation(locationObjectArray, index);
+            map.once('moveend', function() {
+                 // Duration the slide is on screen after interaction
+            slidePlayTimer = window.setTimeout(function() {
+                    // Increment index
+                    index = (index + 1 === locations.length) ? 0 : index + 1;
+                    playback(locationObjectArray,index,0);
+                }, {param_slideLastTime} *1000); // After callback, show the location for x seconds.
+            });
+        };
+    }
+
+//To use goToLocation play all locations like slideshow
+
+    function slideStop(){
+            slideshowControl = "stop";
+            if("{param_playIcon}"){
+                $(".slideshowPlayStopButton").css("background-image", "url({param_playIcon})");
+            };
+            //change play button icon
+            map.stop();
+            clearTimeout(slidePlayTimer);
+    }
+
+///////////////////////////////////////////
+    if ("{param_locationSwitch}"=="true"){
+        var geoJSON;
+        var locations;
+        
+        $.when( $.get('{param_geoJSONFile}',function(data){
+                geoJSON=data;
+            },'json')).done(function ( v1 ) {
+                locations = geoJSON['features']
+                addCameraPropToGeoJSON(locations);
+                //create and add marker to map
+                if('{param_createMarker}'=='true'){
+                            geoJSON.features.forEach(function(marker) {
+                                        // create a DOM element for the marker
+                                        var el = document.createElement('div');
+                                        el.className = 'marker';
+                                        el.style.backgroundImage = 'url({param_markerImage})';
+                                        el.style.width = '{param_markerSize}px';
+                                        el.style.height = '{param_markerSize}px';
+                                        el.addEventListener('click', function() {
+                                            if (slideshowControl=="slidePlay"){
+                                            slideshowControl="slideStop";
+                                            }
+                                            if ('{param_taskOfClick}'=='goToLocation'){
+                                                slideStop();
+                                                goToLocation([marker], 0)
+                                            }
+                                            if ('{param_taskOfClick}'=='popupWindow'){
+                                            slideStop();
+                                            window.alert(marker.properties.title +
+marker.properties.description);
+                                            }
+                                            });
+
+
+                                        // add marker to map
+                                        new mapboxgl.Marker(el, {offset: [-{param_markerSize} / 2, -{param_markerSize} / 2]})
+                                            .setLngLat(marker.geometry.coordinates)
+                                            .addTo(map);
+                            });
+                };
+                //play slideshow
+                if ("{param_locationSlideshowSwitch}"=="false"){
+                    goToLocation(locations, 0);
+                }else{
+                    // Start the playback animation
+                    playback(locations,0,1);
+                };
+                              
+                
+        });
+        //load geoJSON as object
+
+        if ("{param_showLocationBackNext}"=="true"){
+                $(".locationBackButton").click(function(){
+                    slideStop();
+                    if (currentLocationIndex>0){
+                    goToLocation(locations, currentLocationIndex - 1);
+                    }
+                    else{
+                    goToLocation(locations, locations.length-1);
+                    }
+    
+                }
+                
+                );
+                $(".locationNextButton").click(function(){
+                    slideStop();
+                    if (currentLocationIndex < locations.length-1){
+                    goToLocation(locations, currentLocationIndex + 1);
+                    }
+                    else{
+                    goToLocation(locations, 0);
+                    }
+                }
+
+                );
+            }
+        // Next and Back button setup
+
+
+        if ("{param_locationSlideshowSwitch}"=="true"){
+                $(".slideshowPlayStopButton").click(function(){
+                    if (slideshowControl != "stop"){
+                        slideStop();
+                        }else{
+                        slideshowControl = "play";
+                        playback(locations,currentLocationIndex+1,1);
+                    }
+                });
+            };
+            // Slideshow Play/Stop button setup
+
+
+
+            map.on('load', function() {
+            
+
+                }
+            );
+   } 
+    </script>
+]]>
+        
+    </bodyEndHTML>
+    <pageItemPosterHTML></pageItemPosterHTML>
+</HTMLWidget>
