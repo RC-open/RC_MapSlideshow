@@ -8,7 +8,7 @@ Originally, this project was created for my own website, http://renechen.me, you
 
 To use RC_MapSlideshow in your website project:
 
-you can download RC_MapSlideshow.mulib and example.geojson, which is packed with all needed elements, such as navigation buttons, title container, decription container and media container.
+you can download example.geojson and RC_MapSlideshow.mulib, which is packed with all needed elements, such as navigation buttons, title container, decription container and media container.
 
 System Requirement:
 
