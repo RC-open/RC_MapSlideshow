@@ -11,6 +11,7 @@ To use RC_MapSlideshow in your website project:
 you can download example.geojson and RC_MapSlideshow.mulib, which is packed with all needed elements, such as navigation buttons, title container, decription container and media container.
 
 Update 1.01 July 3, 2017
+
 Addressed an issue that when used in fluid website, the map canvas, in certain breakpoints, initially won't be sized properly.
 
 System Requirement:
