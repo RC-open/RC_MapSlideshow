@@ -218,11 +218,11 @@
         //console.log('divW '+ mapDivWidth + ' divH '+mapDivHeight +' cvsW '+canvasWidth +' cvsH '+canvasHeight);
 
         if (mapDivWidth !== canvasWidth){
-            $('.mapboxgl-canvas').width(mapDivWidth);
+             map.resize();
             //console.log('widthAdjusted');
         }
         if (mapDivHeight !== canvasHeight){
-            $('.mapboxgl-canvas').height(mapDivHeight); 
+             map.resize(); 
             //console.log('heightAdjusted');
         }
     }
