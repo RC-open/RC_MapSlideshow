@@ -209,6 +209,31 @@
 ////////////When referring muse class, please use ".className" format in arrays and varibles////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //check the map canvas size 
+    function checkCanvasSize() {
+        var mapDivWidth = $('#map').width();
+        var mapDivHeight = $('#map').height();
+        var canvasWidth = $('.mapboxgl-canvas').width();
+        var canvasHeight = $('.mapboxgl-canvas').height();
+        //console.log('divW '+ mapDivWidth + ' divH '+mapDivHeight +' cvsW '+canvasWidth +' cvsH '+canvasHeight);
+
+        if (mapDivWidth !== canvasWidth){
+            $('.mapboxgl-canvas').width(mapDivWidth);
+            //console.log('widthAdjusted');
+        }
+        if (mapDivHeight !== canvasHeight){
+            $('.mapboxgl-canvas').height(mapDivHeight); 
+            //console.log('heightAdjusted');
+        }
+    }
+    
+    map.on('dataloading',function(){ //run when map is first time rendered
+        checkCanvasSize();
+        //console.log('running checkCanvasSize');
+    });
+
+
+
 
     // To set the text to identified element by Muse Class
     function setTextToMuseClass(contentArray, museClassNameArray,){
