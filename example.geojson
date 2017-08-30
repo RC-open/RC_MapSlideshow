@@ -1,44 +1,20 @@
 {
-  "type": "FeatureCollection",
   "features": [
     {
-      "geometry": {
-        "coordinates": [
-          13.350111,
-          52.514506
-        ],
-        "type": "Point"
-      },
-      "id": "4715bd7321c0e9b06502671ebe70822d"
-    },
-    {
       "type": "Feature",
       "properties": {
-        "title": "Tiregarten, Zoo or hunting ground",
-        "description": "Description for Tiregarten, Zoo or hunting ground",
-        "mediaType": "video",
-        "mediaName": "video.mp4"
-        
+        "title": "Office",
+        "description": "Office for HR and Finance <a href='http://www.apple.com'>Go To Apple</a>"
       },
       "geometry": {
         "coordinates": [
-          13.357418,
-          52.514424
+          121.487874,
+          31.221555
         ],
         "type": "Point"
       },
-      "id": "b76e2fd8ba2751f5bf194d854bfbbdc9"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Brandenburg Gate",
-        "description": "Description for Brandenburg Gate",
-        "mediaType": "image",
-        "mediaName": "photo.jpg"
-      }
+      "id": "a45980f656829b8f16b4b70c17ad9549"
     }
-  ]
+  ],
+  "type": "FeatureCollection"
 }
-//All media files should be in Assets folder. You can use upload file function in Adobe Muse to upload them.
-//Play Slideshow feature will play the locations with a sequence from top t bottom, even though geoJson as an object which does not keep index.
