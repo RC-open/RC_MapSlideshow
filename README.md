@@ -12,7 +12,11 @@ you can download example.geojson and RC_MapSlideshow.mulib, which is packed with
 
 Update 1.02, August 30th, 2017
 
-Now the text box of title and description can recognize HTML tags, such as <a/> as hyper-link. e.g. "description": "Office for HR and Finance <a href='http://www.apple.com'>Go To Apple</a>" will be shown in the description box as "Office for HR and Finance Go To Apple".
+Now the text box of title and description can recognize HTML tags, such as <a/> as hyper-link. e.g. 
+```
+"description": "Office for HR and Finance <a href='http://www.apple.com'>Go To Apple</a>"
+```
+will be shown in the description box as "Office for HR and Finance Go To Apple".
 
 Update 1.01 July 3, 2017
 
