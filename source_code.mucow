@@ -239,7 +239,7 @@
     function setTextToMuseClass(contentArray, museClassNameArray,){
     $.each(contentArray, function(index, value){
         $(museClassNameArray[index]).fadeOut(function() {
-                $(this).text(value).fadeIn();
+                $(this).html(value).fadeIn();
         });
     })
     }
